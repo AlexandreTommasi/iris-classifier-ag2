@@ -24,7 +24,7 @@ def print_banner():
     print("=" * 70)
     print("\nEquipe:")
     print("  - Alexandre Tommasi")
-    print("  - Davi Augusto")
+    print("  - Davi Rabelo")
     print("\nModelo: Decision Tree Classifier")
     print("Dataset: Iris (150 amostras, 3 classes)")
     print("Objetivo: Classificar especies de flores Iris")
