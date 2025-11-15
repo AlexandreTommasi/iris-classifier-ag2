@@ -3,7 +3,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-
 def load_model_and_data():
     """
     Carrega os dados de teste e o modelo treinado.
@@ -32,13 +31,11 @@ def evaluate_model(modelo, X_test, y_test):
     print("Avaliando modelo...")
     y_pred = modelo.predict(X_test)
     
-
     accuracy = accuracy_score(y_test, y_pred)
     
-
     labels_list = [1, 2, 3]
     target_names_list = ['Setosa', 'Versicolor', 'Virginica']
-
+    
     report = classification_report(
         y_test, 
         y_pred, 
@@ -60,27 +57,42 @@ def create_confusion_matrix(y_test, y_pred):
     labels_list = [1, 2, 3]
     display_labels = ['Setosa', 'Versicolor', 'Virginica']
     
-
     cm = confusion_matrix(y_test, y_pred, labels=labels_list)
     
-
     plt.figure(figsize=(8, 6))
-    sns.heatmap(
+    ax = sns.heatmap(
         cm, 
-        annot=True, 
+        annot=False, 
         fmt='d', 
         cmap='Blues', 
         xticklabels=display_labels, 
-        yticklabels=display_labels
+        yticklabels=display_labels,
+        cbar=True 
     )
-    plt.title('Matriz de Confusão')
-    plt.ylabel('Classe Verdadeira')
-    plt.xlabel('Classe Prevista')
+    
+    plt.title('Matriz de Confusão', fontsize=18)
+    plt.ylabel('Classe Verdadeira', fontsize=12)
+    plt.xlabel('Classe Prevista', fontsize=12)
+
+    thresh = cm.max() / 2.
     
 
+    for i in range(cm.shape[0]):
+        for j in range(cm.shape[1]):
+            
+            ax.text(
+                j + 0.5,
+                i + 0.5, 
+                f"{cm[i, j]}", 
+                ha="center", 
+                va="center",
+                
+                color="white" if cm[i, j] > thresh else "black",
+                fontsize=16 # Tamanho da fonte
+            )
+    
     plt.savefig('matriz_confusao.png', dpi=300, bbox_inches='tight')
     print(f"Matriz de confusão salva como 'matriz_confusao.png'")
-
 
     print("\n--- Interpretação da Matriz ---")
     print("A diagonal principal (de cima-esquerda para baixo-direita) mostra os acertos.")
