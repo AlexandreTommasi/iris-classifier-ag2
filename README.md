@@ -7,7 +7,7 @@ Sistema de classificação de flores Iris utilizando Machine Learning com Decisi
 ## 👥 Equipe
 
 - **Alexandre Tommasi**
-- **Davi Augusto**
+- **Davi Rabelo**
 
 ---
 
